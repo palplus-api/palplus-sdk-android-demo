@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity {
       @Override
       public void onClick(View view) {
         if (PalPlus.getForum().canResolveCreateArticleIntent(boardId)) {
-          startActivity(PalPlus.getForum().createCreateArticleIntent(boardId, null));
+          startActivity(PalPlus.getForum().createCreateArticleIntent(boardId, null, null));
         } else {
           Toast.makeText(MainActivity.this, "Please install Pal+ first!", Toast.LENGTH_SHORT)
               .show();
@@ -47,7 +47,19 @@ public class MainActivity extends ActionBarActivity {
       @Override
       public void onClick(View view) {
         if (PalPlus.getForum().canResolveCreateArticleIntent(boardId)) {
-          startActivity(PalPlus.getForum().createCreateArticleIntent(boardId, pictureUri));
+          startActivity(PalPlus.getForum().createCreateArticleIntent(boardId, pictureUri, null));
+        } else {
+          Toast.makeText(MainActivity.this, "Please install Pal+ first!", Toast.LENGTH_SHORT)
+              .show();
+        }
+      }
+    });
+    findViewById(R.id.createArticleWithPictureAndTextButton).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if (PalPlus.getForum().canResolveCreateArticleIntent(boardId)) {
+          startActivity(PalPlus.getForum()
+              .createCreateArticleIntent(boardId, pictureUri, "hello world"));
         } else {
           Toast.makeText(MainActivity.this, "Please install Pal+ first!", Toast.LENGTH_SHORT)
               .show();
