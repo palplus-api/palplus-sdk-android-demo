@@ -1,26 +1,32 @@
 package me.palplus.demo;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 import me.palplus.sdk.PalPlus;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
+
+  private final static String BOARD_ID = "cd1ec670-ab5a-11e4-9e3a-25191cafc7c9";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    final String boardId = "cd1ec670-ab5a-11e4-9e3a-25191cafc7c9";
+    findViewById(R.id.goToMessenger).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        startActivity(new Intent(MainActivity.this, ConnectActivity.class));
+      }
+    });
     findViewById(R.id.goToBoardButton).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if (PalPlus.getForum().canResolveOpenBoardIntent(boardId)) {
-          startActivity(PalPlus.getForum().createOpenBoardIntent(boardId));
+        if (PalPlus.getForum().canResolveOpenBoardIntent(BOARD_ID)) {
+          startActivity(PalPlus.getForum().createOpenBoardIntent(BOARD_ID));
         } else {
           Toast.makeText(MainActivity.this, "Please install Pal+ first!", Toast.LENGTH_SHORT)
               .show();
@@ -35,8 +41,8 @@ public class MainActivity extends ActionBarActivity {
     findViewById(R.id.createArticleButton).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if (PalPlus.getForum().canResolveCreateArticleIntent(boardId)) {
-          startActivity(PalPlus.getForum().createCreateArticleIntent(boardId, null, null));
+        if (PalPlus.getForum().canResolveCreateArticleIntent(BOARD_ID)) {
+          startActivity(PalPlus.getForum().createCreateArticleIntent(BOARD_ID, null, null));
         } else {
           Toast.makeText(MainActivity.this, "Please install Pal+ first!", Toast.LENGTH_SHORT)
               .show();
@@ -46,8 +52,8 @@ public class MainActivity extends ActionBarActivity {
     findViewById(R.id.createArticleWithPictureButton).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if (PalPlus.getForum().canResolveCreateArticleIntent(boardId)) {
-          startActivity(PalPlus.getForum().createCreateArticleIntent(boardId, pictureUri, null));
+        if (PalPlus.getForum().canResolveCreateArticleIntent(BOARD_ID)) {
+          startActivity(PalPlus.getForum().createCreateArticleIntent(BOARD_ID, pictureUri, null));
         } else {
           Toast.makeText(MainActivity.this, "Please install Pal+ first!", Toast.LENGTH_SHORT)
               .show();
@@ -57,36 +63,14 @@ public class MainActivity extends ActionBarActivity {
     findViewById(R.id.createArticleWithPictureAndTextButton).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if (PalPlus.getForum().canResolveCreateArticleIntent(boardId)) {
+        if (PalPlus.getForum().canResolveCreateArticleIntent(BOARD_ID)) {
           startActivity(PalPlus.getForum()
-              .createCreateArticleIntent(boardId, pictureUri, "hello world"));
+              .createCreateArticleIntent(BOARD_ID, pictureUri, "hello world"));
         } else {
           Toast.makeText(MainActivity.this, "Please install Pal+ first!", Toast.LENGTH_SHORT)
               .show();
         }
       }
     });
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.menu_main, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    // Handle action bar item clicks here. The action bar will
-    // automatically handle clicks on the Home/Up button, so long
-    // as you specify a parent activity in AndroidManifest.xml.
-    int id = item.getItemId();
-
-    //noinspection SimplifiableIfStatement
-    if (id == R.id.action_settings) {
-      return true;
-    }
-
-    return super.onOptionsItemSelected(item);
   }
 }

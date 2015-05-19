@@ -1,6 +1,10 @@
 <resources>
-    <string name="app_name">Demo</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">SDK Demo</string>
+    <string name="send_text">Send Text</string>
+    <string name="send_img">Send Image</string>
+    <string name="send_app">Send App Button</string>
+    <string name="send_app_link">Send App Link</string>
+    <string name="send_all">Send All</string>
+
 </resources>
