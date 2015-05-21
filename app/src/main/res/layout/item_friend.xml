@@ -18,7 +18,7 @@
             android:layout_marginLeft="8dp"
             android:layout_toRightOf="@id/iconView"
             android:gravity="center_vertical"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="18sp"/>
 
 </RelativeLayout>
